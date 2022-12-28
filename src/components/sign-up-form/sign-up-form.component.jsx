@@ -41,7 +41,7 @@ const SignUpForm = () => {
       if (resp) {
         const { user } = resp;
         user.displayName = displayName;
-        createUserDocumentFromAuth(user);
+        await createUserDocumentFromAuth(user);
         resetFormFields();
       }
     } catch (error) {
