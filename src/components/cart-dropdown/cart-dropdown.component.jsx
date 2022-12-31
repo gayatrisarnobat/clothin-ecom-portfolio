@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setIsCartOpen } from '../../store/cart/cart.action';
@@ -15,20 +15,12 @@ import {
 const CartDropdown = () => {
   const cartItems = useSelector(selectCartItems);
   const dispatch = useDispatch();
-  const [shouldNavigateToCheckout, setShouldNavigateToCheckout] =
-    useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (shouldNavigateToCheckout) {
-      navigate('checkout');
-      dispatch(setIsCartOpen(false));
-    }
-  }, [shouldNavigateToCheckout]);
-
-  const navigateToCheckout = () => {
-    setShouldNavigateToCheckout(true);
-  };
+  const navigateToCheckout = useCallback(() => {
+    navigate('checkout');
+    dispatch(setIsCartOpen(false));
+  }, []);
 
   return (
     <CartDropdownContainer>
