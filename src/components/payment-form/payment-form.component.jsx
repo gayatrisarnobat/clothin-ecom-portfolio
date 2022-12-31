@@ -39,11 +39,20 @@ const PaymentForm = () => {
 
     const clientSecret = response.paymentIntent.client_secret;
 
+    const getUserName = () => {
+      if (currentUser) {
+        return currentUser.displayName
+          ? currentUser.displayName
+          : currentUser.email;
+      }
+      return 'Guest';
+    };
+
     const paymentResult = await stripe.confirmCardPayment(clientSecret, {
       payment_method: {
         card: elements.getElement(CardElement),
         billing_details: {
-          name: currentUser ? currentUser.displayName : 'Guest',
+          name: getUserName(),
         },
       },
     });
