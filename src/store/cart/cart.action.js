@@ -12,3 +12,5 @@ export const removeItemFromCart = (cartItemToRemove) =>
 
 export const clearItem = (cartItemToClear) =>
   createAction(CART_ACTIONS.CLEAR_FULL_CART_ITEM, cartItemToClear);
+
+export const clearFullCart = () => createAction(CART_ACTIONS.CLEAR_FULL_CART);
